@@ -130,11 +130,11 @@ public class SlideInPresentationController: UIPresentationController {
         let percent: CGFloat
         switch direction {
         case .left:
-            percent = 1 - translate.x / gesture.view!.bounds.size.width
+            percent = -translate.x / gesture.view!.bounds.size.width
         case .right:
             percent = translate.x / gesture.view!.bounds.size.width
         case .top:
-            percent = 1 - translate.y / gesture.view!.bounds.size.height
+            percent = -translate.y / gesture.view!.bounds.size.height
         case .bottom:
             percent = translate.y / gesture.view!.bounds.size.height
         }
