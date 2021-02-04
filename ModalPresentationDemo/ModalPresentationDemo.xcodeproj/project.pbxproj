@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84408FE725CC7EEB00BDD188 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE225CC7EEB00BDD188 /* SlideInPresentationAnimator.swift */; };
+		84408FE825CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE325CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift */; };
+		84408FE925CC7EEB00BDD188 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE425CC7EEB00BDD188 /* SlideInPresentationController.swift */; };
+		84408FEA25CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */; };
+		84408FF825CC7F5A00BDD188 /* libModalPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84408FD625CC7ECE00BDD188 /* libModalPresentation.a */; };
 		845242A125CC4CF10042D09E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A025CC4CF10042D09E /* AppDelegate.swift */; };
 		845242A325CC4CF10042D09E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A225CC4CF10042D09E /* SceneDelegate.swift */; };
 		845242A525CC4CF10042D09E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A425CC4CF10042D09E /* ViewController.swift */; };
@@ -19,10 +24,16 @@
 		845242E125CC4DF50042D09E /* PopUpModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242DD25CC4DF50042D09E /* PopUpModalViewController.swift */; };
 		845242E225CC4DF50042D09E /* SlideInModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242DE25CC4DF50042D09E /* SlideInModalViewController.swift */; };
 		845242E325CC4DF50042D09E /* SlideInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242DF25CC4DF50042D09E /* SlideInViewController.swift */; };
-		845242EC25CC4F300042D09E /* ModalPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 845242EB25CC4F300042D09E /* ModalPresentation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		84408FF925CC7F5A00BDD188 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8452429525CC4CF10042D09E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84408FD525CC7ECE00BDD188;
+			remoteInfo = ModalPresentation;
+		};
 		845242B425CC4CF40042D09E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8452429525CC4CF10042D09E /* Project object */;
@@ -39,7 +50,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		84408FD425CC7ECE00BDD188 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		84408FD625CC7ECE00BDD188 /* libModalPresentation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libModalPresentation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		84408FE225CC7EEB00BDD188 /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
+		84408FE325CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationCoordinator.swift; sourceTree = "<group>"; };
+		84408FE425CC7EEB00BDD188 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
+		84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverPresentationCoordinator.swift; sourceTree = "<group>"; };
 		8452429D25CC4CF10042D09E /* ModalPresentationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModalPresentationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845242A025CC4CF10042D09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		845242A225CC4CF10042D09E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,11 +89,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		84408FD325CC7ECE00BDD188 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8452429A25CC4CF10042D09E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845242EC25CC4F300042D09E /* ModalPresentation in Frameworks */,
+				84408FF825CC7F5A00BDD188 /* libModalPresentation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,13 +121,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84408FD725CC7ECE00BDD188 /* ModalPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				84408FE525CC7EEB00BDD188 /* PopOverPresentation */,
+				84408FE125CC7EEB00BDD188 /* SlideInPresentation */,
+			);
+			path = ModalPresentation;
+			sourceTree = "<group>";
+		};
+		84408FE125CC7EEB00BDD188 /* SlideInPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				84408FE225CC7EEB00BDD188 /* SlideInPresentationAnimator.swift */,
+				84408FE325CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift */,
+				84408FE425CC7EEB00BDD188 /* SlideInPresentationController.swift */,
+			);
+			name = SlideInPresentation;
+			path = ../../Sources/ModalPresentation/SlideInPresentation;
+			sourceTree = "<group>";
+		};
+		84408FE525CC7EEB00BDD188 /* PopOverPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */,
+			);
+			name = PopOverPresentation;
+			path = ../../Sources/ModalPresentation/PopOverPresentation;
+			sourceTree = "<group>";
+		};
+		84408FF725CC7F5A00BDD188 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8452429425CC4CF10042D09E = {
 			isa = PBXGroup;
 			children = (
 				8452429F25CC4CF10042D09E /* ModalPresentationDemo */,
 				845242B625CC4CF40042D09E /* ModalPresentationDemoTests */,
 				845242C125CC4CF40042D09E /* ModalPresentationDemoUITests */,
+				84408FD725CC7ECE00BDD188 /* ModalPresentation */,
 				8452429E25CC4CF10042D09E /* Products */,
+				84408FF725CC7F5A00BDD188 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +175,7 @@
 				8452429D25CC4CF10042D09E /* ModalPresentationDemo.app */,
 				845242B325CC4CF40042D09E /* ModalPresentationDemoTests.xctest */,
 				845242BE25CC4CF40042D09E /* ModalPresentationDemoUITests.xctest */,
+				84408FD625CC7ECE00BDD188 /* libModalPresentation.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +219,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		84408FD525CC7ECE00BDD188 /* ModalPresentation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84408FDA25CC7ECE00BDD188 /* Build configuration list for PBXNativeTarget "ModalPresentation" */;
+			buildPhases = (
+				84408FD225CC7ECE00BDD188 /* Sources */,
+				84408FD325CC7ECE00BDD188 /* Frameworks */,
+				84408FD425CC7ECE00BDD188 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ModalPresentation;
+			productName = ModalPresentation;
+			productReference = 84408FD625CC7ECE00BDD188 /* libModalPresentation.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		8452429C25CC4CF10042D09E /* ModalPresentationDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 845242C725CC4CF40042D09E /* Build configuration list for PBXNativeTarget "ModalPresentationDemo" */;
@@ -156,10 +247,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				84408FFA25CC7F5A00BDD188 /* PBXTargetDependency */,
 			);
 			name = ModalPresentationDemo;
 			packageProductDependencies = (
-				845242EB25CC4F300042D09E /* ModalPresentation */,
 			);
 			productName = ModalPresentationDemo;
 			productReference = 8452429D25CC4CF10042D09E /* ModalPresentationDemo.app */;
@@ -210,6 +301,9 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					84408FD525CC7ECE00BDD188 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					8452429C25CC4CF10042D09E = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -233,7 +327,6 @@
 			);
 			mainGroup = 8452429425CC4CF10042D09E;
 			packageReferences = (
-				845242EA25CC4F300042D09E /* XCRemoteSwiftPackageReference "ModalPresentation" */,
 			);
 			productRefGroup = 8452429E25CC4CF10042D09E /* Products */;
 			projectDirPath = "";
@@ -242,6 +335,7 @@
 				8452429C25CC4CF10042D09E /* ModalPresentationDemo */,
 				845242B225CC4CF40042D09E /* ModalPresentationDemoTests */,
 				845242BD25CC4CF40042D09E /* ModalPresentationDemoUITests */,
+				84408FD525CC7ECE00BDD188 /* ModalPresentation */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +368,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		84408FD225CC7ECE00BDD188 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84408FEA25CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift in Sources */,
+				84408FE825CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift in Sources */,
+				84408FE925CC7EEB00BDD188 /* SlideInPresentationController.swift in Sources */,
+				84408FE725CC7EEB00BDD188 /* SlideInPresentationAnimator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8452429925CC4CF10042D09E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +412,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		84408FFA25CC7F5A00BDD188 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84408FD525CC7ECE00BDD188 /* ModalPresentation */;
+			targetProxy = 84408FF925CC7F5A00BDD188 /* PBXContainerItemProxy */;
+		};
 		845242B525CC4CF40042D09E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8452429C25CC4CF10042D09E /* ModalPresentationDemo */;
@@ -339,6 +449,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		84408FDB25CC7ECE00BDD188 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		84408FDC25CC7ECE00BDD188 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
 		845242C525CC4CF40042D09E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -580,6 +724,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		84408FDA25CC7ECE00BDD188 /* Build configuration list for PBXNativeTarget "ModalPresentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84408FDB25CC7ECE00BDD188 /* Debug */,
+				84408FDC25CC7ECE00BDD188 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8452429825CC4CF10042D09E /* Build configuration list for PBXProject "ModalPresentationDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -617,25 +770,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		845242EA25CC4F300042D09E /* XCRemoteSwiftPackageReference "ModalPresentation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/admin/Repos/ModalPresentation";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		845242EB25CC4F300042D09E /* ModalPresentation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 845242EA25CC4F300042D09E /* XCRemoteSwiftPackageReference "ModalPresentation" */;
-			productName = ModalPresentation;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8452429525CC4CF10042D09E /* Project object */;
 }
