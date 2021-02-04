@@ -9,10 +9,10 @@
 import UIKit
 
 public class SlideInPresentationCoordinator: NSObject {
-    var direction: SlideInPresentationDirection = .bottom
-    var proportion: SlideInPresentationProportion = .normal
-    var dimmingEffect: SlideInPresentationDimmingEffect = .dimming
-    var disableCompactVerticalSize = false
+    public var direction: SlideInPresentationDirection = .bottom
+    public var proportion: SlideInPresentationProportion = .normal
+    public var dimmingEffect: SlideInPresentationDimmingEffect = .dimming
+    public var disableCompactVerticalSize = false
 
     weak var interactionController: UIPercentDrivenInteractiveTransition?
 }

@@ -21,7 +21,7 @@ public enum SlideInPresentationProportion {
     case full
     case value(Value)
 
-    init?(value: Value) {
+    public init?(value: Value) {
         let range: ClosedRange<Value> = (0...1)
         precondition(range.contains(value))
         self = SlideInPresentationProportion.value(value)
