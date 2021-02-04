@@ -1,3 +1,8 @@
 # ModalPresentation
 
-A description of this package.
+Custom Modal Presenantion Controllers:
+
+• SlideInPresentetion
+• PopOverPresenatiton
+
+See demo project fro usage
