@@ -623,7 +623,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "file:///Users/admin/Repos/ModalPresentation";
 			requirement = {
-				branch = main;
+				branch = develop;
 				kind = branch;
 			};
 		};
