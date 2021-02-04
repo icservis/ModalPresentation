@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ModalPresentation",
+        "repositoryURL": "/Users/admin/Repos/ModalPresentation",
+        "state": {
+          "branch": "main",
+          "revision": "f27a26a45e9295744d16f886a20f2a9e1362ac5a",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
