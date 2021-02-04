@@ -1,3 +1,9 @@
-struct ModalPresentation {
-    var text = "Hello, World!"
+import UIKit
+
+class ModalPresentationCoordinator: NSObject {
+
+}
+
+extension ModalPresentationCoordinator: UIViewControllerTransitioningDelegate {
+
 }
