@@ -8,15 +8,15 @@
 
 import UIKit
 
-enum SlideInPresentationDirection: Int {
+public enum SlideInPresentationDirection: Int {
     case left = 0
     case top
     case right
     case bottom
 }
 
-enum SlideInPresentationProportion {
-    typealias Value = CGFloat
+public enum SlideInPresentationProportion {
+    public typealias Value = CGFloat
     case normal
     case full
     case value(Value)
@@ -43,19 +43,19 @@ enum SlideInPresentationProportion {
     }
 }
 
-enum SlideInPresentationDimmingEffect {
+public enum SlideInPresentationDimmingEffect {
     case dimming
     case blur(style: UIBlurEffect.Style)
 }
 
-enum SlideInPresentationTransitionPhase {
+public enum SlideInPresentationTransitionPhase {
     case presentation
     // case management
     case dismissal
 }
 
 
-class SlideInPresentationController: UIPresentationController {
+public class SlideInPresentationController: UIPresentationController {
     private let direction: SlideInPresentationDirection
     private let proportion: SlideInPresentationProportion
     private let dimmingEffect: SlideInPresentationDimmingEffect
@@ -157,7 +157,7 @@ class SlideInPresentationController: UIPresentationController {
         }
     }
 
-    override func presentationTransitionWillBegin() {
+    public override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
 
         guard let containerView = containerView else { return }
@@ -200,7 +200,7 @@ class SlideInPresentationController: UIPresentationController {
         )
     }
 
-    override func presentationTransitionDidEnd(_ completed: Bool) {
+    public override func presentationTransitionDidEnd(_ completed: Bool) {
         super.presentationTransitionDidEnd(completed)
 
         if !completed {
@@ -213,7 +213,7 @@ class SlideInPresentationController: UIPresentationController {
         }
     }
 
-    override func dismissalTransitionWillBegin() {
+    public override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
@@ -232,7 +232,7 @@ class SlideInPresentationController: UIPresentationController {
         )
     }
 
-    override func dismissalTransitionDidEnd(_ completed: Bool) {
+    public override func dismissalTransitionDidEnd(_ completed: Bool) {
         super.dismissalTransitionDidEnd(completed)
 
         if completed {
@@ -245,13 +245,13 @@ class SlideInPresentationController: UIPresentationController {
         }
     }
 
-    override func containerViewWillLayoutSubviews() {
+    public override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
 
         presentedView?.frame = frameOfPresentedViewInContainerView
     }
 
-    override func size(
+    public override func size(
         forChildContentContainer container: UIContentContainer,
         withParentContainerSize parentSize: CGSize
     ) -> CGSize {
@@ -269,7 +269,7 @@ class SlideInPresentationController: UIPresentationController {
         }
     }
 
-    override var frameOfPresentedViewInContainerView: CGRect {
+    public override var frameOfPresentedViewInContainerView: CGRect {
         var frame: CGRect = .zero
         guard let containerView = containerView else {
             return frame

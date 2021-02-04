@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SlideInPresentationAnimator: NSObject {
+public class SlideInPresentationAnimator: NSObject {
     private let direction: SlideInPresentationDirection
     private let phase: SlideInPresentationTransitionPhase
 
@@ -19,11 +19,11 @@ class SlideInPresentationAnimator: NSObject {
 }
 
 extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.25
     }
 
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let controller = transitionContext.viewController(forKey: phase.key) else { return }
 
         if case .presentation = phase {
@@ -71,7 +71,7 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     }
 }
 
-extension SlideInPresentationTransitionPhase {
+public extension SlideInPresentationTransitionPhase {
     var key: UITransitionContextViewControllerKey {
         switch self {
         case .presentation:

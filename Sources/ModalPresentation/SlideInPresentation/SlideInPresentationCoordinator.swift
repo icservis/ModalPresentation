@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SlideInPresentationCoordinator: NSObject {
+public class SlideInPresentationCoordinator: NSObject {
     var direction: SlideInPresentationDirection = .bottom
     var proportion: SlideInPresentationProportion = .normal
     var dimmingEffect: SlideInPresentationDimmingEffect = .dimming
@@ -18,7 +18,7 @@ class SlideInPresentationCoordinator: NSObject {
 }
 
 extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate {
-    func presentationController(
+    public func presentationController(
         forPresented presented: UIViewController,
         presenting: UIViewController?,
         source: UIViewController
@@ -35,7 +35,7 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
         return presentationController
     }
 
-    func animationController(
+    public func animationController(
         forPresented presented: UIViewController,
         presenting: UIViewController,
         source: UIViewController
@@ -43,13 +43,13 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
         return SlideInPresentationAnimator(direction: direction, phase: .presentation)
     }
 
-    func animationController(
+    public func animationController(
         forDismissed dismissed: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
         return SlideInPresentationAnimator(direction: direction, phase: .dismissal)
     }
 
-    func interactionControllerForDismissal(
+    public func interactionControllerForDismissal(
         using animator: UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
@@ -57,7 +57,7 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
 }
 
 extension SlideInPresentationCoordinator: UIAdaptivePresentationControllerDelegate {
-    func adaptivePresentationStyle(
+    public func adaptivePresentationStyle(
         for controller: UIPresentationController,
         traitCollection: UITraitCollection
     ) -> UIModalPresentationStyle {

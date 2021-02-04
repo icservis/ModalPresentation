@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PopOverPresentationCoordinator: NSObject {
+public  class PopOverPresentationCoordinator: NSObject {
     
 }
 

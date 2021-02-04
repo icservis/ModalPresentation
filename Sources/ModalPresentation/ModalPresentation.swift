@@ -1,6 +1,6 @@
 import UIKit
 
-class ModalPresentationCoordinator: NSObject {
+open class ModalPresentationCoordinator: NSObject {
 
 }
 
