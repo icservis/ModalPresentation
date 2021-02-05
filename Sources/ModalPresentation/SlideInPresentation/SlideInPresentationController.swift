@@ -32,7 +32,7 @@ public enum SlideInPresentationProportion {
         case .normal:
             return 0.45
         case .full:
-            return 0.95
+            return 0.9
         case let .value(value):
             return value
         }
@@ -44,7 +44,7 @@ public enum SlideInPresentationProportion {
 }
 
 public enum SlideInPresentationDimmingEffect {
-    case dimming
+    case dimming(alpha: CGFloat)
     case blur(style: UIBlurEffect.Style)
 }
 
@@ -86,21 +86,21 @@ public class SlideInPresentationController: UIPresentationController {
     }
 
     lazy private var dimmingView: UIView = {
-        guard case .dimming = dimmingEffect else { fatalError() }
+        guard case let .dimming(alpha) = dimmingEffect else { fatalError() }
         let dimmingView = UIView()
-        dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        dimmingView.backgroundColor = UIColor(white: 0.0, alpha: alpha)
         dimmingView.alpha = 0.0
         return dimmingView
     }()
 
-    private var blurView: UIVisualEffectView {
+    lazy private var blurView: UIVisualEffectView = {
         guard case let .blur(style) = dimmingEffect else { fatalError() }
         let blurEffect = UIBlurEffect(style: style)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.backgroundColor = .clear
         blurView.alpha = 1.0
         return blurView
-    }
+    }()
 
     private func setupTapGesture() {
         let recogniser = UITapGestureRecognizer(
@@ -148,7 +148,18 @@ public class SlideInPresentationController: UIPresentationController {
             interactionController?.cancel()
         } else if gesture.state == .ended {
             let velocity = gesture.velocity(in: gesture.view)
-            if (percent > 0.5 && velocity.y == 0) || velocity.y > 0 {
+            let condition: Bool
+            switch direction {
+            case .left:
+                condition = (percent > 0.5 && velocity.x == 0) || velocity.x < 0
+            case .top:
+                condition = (percent > 0.5 && velocity.y == 0) || velocity.y < 0
+            case .right:
+                condition = (percent > 0.5 && velocity.x == 0) || velocity.x > 0
+            case .bottom:
+                condition = (percent > 0.5 && velocity.y == 0) || velocity.y > 0
+            }
+            if condition {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()
