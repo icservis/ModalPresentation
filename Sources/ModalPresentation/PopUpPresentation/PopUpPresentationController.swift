@@ -26,12 +26,6 @@ public enum PopUpPresentationVisualEffect {
     case blur(style: UIBlurEffect.Style)
 }
 
-public enum PopUpPresentationTransitionPhase {
-    case presentation
-    // case management
-    case dismissal
-}
-
 public class PopUpPresentationController: UIPresentationController {
     private let position: PopUpPresentationPosition
     private let visualEffect: PopUpPresentationVisualEffect

@@ -48,13 +48,6 @@ public enum SlideInPresentationVisualEffect {
     case blur(style: UIBlurEffect.Style)
 }
 
-public enum SlideInPresentationTransitionPhase {
-    case presentation
-    // case management
-    case dismissal
-}
-
-
 public class SlideInPresentationController: UIPresentationController {
     private let direction: SlideInPresentationDirection
     private let proportion: SlideInPresentationProportion
