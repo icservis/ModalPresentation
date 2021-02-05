@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3U-E3-qmc">
-                                <rect key="frame" x="140" y="683" width="134" height="30"/>
+                                <rect key="frame" x="140" y="743" width="134" height="30"/>
                                 <state key="normal" title="Open PopUp Modal"/>
                                 <connections>
                                     <segue destination="pw9-Sv-EwO" kind="popoverPresentation" identifier="openPopup" popoverAnchorView="S3U-E3-qmc" id="wt7-Zi-Kci">
@@ -49,7 +49,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="S3U-E3-qmc" firstAttribute="centerX" secondItem="UO0-Bm-vYl" secondAttribute="centerX" id="hH2-qI-RxB"/>
-                            <constraint firstItem="8al-rC-6d5" firstAttribute="bottom" secondItem="S3U-E3-qmc" secondAttribute="bottom" constant="100" id="nEl-ge-f2a"/>
+                            <constraint firstItem="8al-rC-6d5" firstAttribute="bottom" secondItem="S3U-E3-qmc" secondAttribute="bottom" constant="40" id="nEl-ge-f2a"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PopUp" image="folder.circle.fill" catalog="system" id="gIu-9A-Csj"/>
@@ -100,14 +100,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZZ-aF-G0c">
-                                <rect key="frame" x="140" y="683" width="134" height="30"/>
+                                <rect key="frame" x="140" y="743" width="134" height="30"/>
                                 <state key="normal" title="Open SlideIn Modal"/>
                                 <connections>
                                     <segue destination="2Ac-Xi-OaG" kind="presentation" identifier="openModal" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Y0M-RO-CbG"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JCh-gJ-MOP">
-                                <rect key="frame" x="48" y="94" width="318" height="31"/>
+                                <rect key="frame" x="18" y="94" width="378" height="31"/>
                                 <connections>
                                     <action selector="proportionValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="C5f-lL-O0T"/>
                                 </connections>
@@ -124,24 +124,66 @@
                                     <action selector="directionControlChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aOc-aQ-2ZF"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-IM-QjD">
+                                <rect key="frame" x="133.5" y="255" width="147" height="32"/>
+                                <segments>
+                                    <segment title="Dimming"/>
+                                    <segment title="Blur"/>
+                                </segments>
+                                <connections>
+                                    <action selector="visualEffectChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dAg-6H-2Qi"/>
+                                </connections>
+                            </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C28-DQ-3DV">
+                                <rect key="frame" x="20" y="306" width="374" height="61"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Lb-b8-8pd">
+                                        <rect key="frame" x="-2" y="0.0" width="378" height="31"/>
+                                        <connections>
+                                            <action selector="dimmingAlphaChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="cT8-mI-xDz"/>
+                                        </connections>
+                                    </slider>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d5X-a8-U8N">
+                                        <rect key="frame" x="0.0" y="30" width="374" height="32"/>
+                                        <segments>
+                                            <segment title="Ultra Light"/>
+                                            <segment title="Light"/>
+                                            <segment title="Dark"/>
+                                            <segment title="Regular"/>
+                                            <segment title="Prominent"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="blurStyleChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dZf-ww-WQh"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JCh-gJ-MOP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="7RE-73-sOo"/>
+                            <constraint firstItem="C28-DQ-3DV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0se-D2-MmI"/>
+                            <constraint firstItem="C28-DQ-3DV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5yt-ql-Chf"/>
+                            <constraint firstItem="JCh-gJ-MOP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7RE-73-sOo"/>
                             <constraint firstItem="JCh-gJ-MOP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KUI-Ka-sxS"/>
                             <constraint firstItem="JPX-g3-yFM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NYY-tk-opu"/>
                             <constraint firstItem="JCh-gJ-MOP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="T6a-GZ-lXt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eZZ-aF-G0c" secondAttribute="bottom" constant="100" id="ez5-Cl-OTo"/>
+                            <constraint firstItem="Ahz-IM-QjD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W0N-AW-Gdc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eZZ-aF-G0c" secondAttribute="bottom" constant="40" id="ez5-Cl-OTo"/>
                             <constraint firstItem="JPX-g3-yFM" firstAttribute="top" secondItem="JCh-gJ-MOP" secondAttribute="bottom" constant="50" id="fxG-Sc-bcy"/>
+                            <constraint firstItem="Ahz-IM-QjD" firstAttribute="top" secondItem="JPX-g3-yFM" secondAttribute="bottom" constant="50" id="pZH-1q-jBb"/>
                             <constraint firstItem="eZZ-aF-G0c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="w7q-IH-HVc"/>
+                            <constraint firstItem="C28-DQ-3DV" firstAttribute="top" secondItem="Ahz-IM-QjD" secondAttribute="bottom" constant="20" id="xDL-ep-gLw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SlideIn" image="square.and.arrow.up" catalog="system" id="q7K-nb-uZx"/>
                     <connections>
+                        <outlet property="blurStyleControl" destination="d5X-a8-U8N" id="pcG-yu-7Ic"/>
+                        <outlet property="dimmingAlphaControl" destination="8Lb-b8-8pd" id="ZQP-uT-pFf"/>
                         <outlet property="directionControl" destination="JPX-g3-yFM" id="4hG-iU-s6D"/>
                         <outlet property="openButton" destination="eZZ-aF-G0c" id="8LU-Yq-qT7"/>
                         <outlet property="proportionControl" destination="JCh-gJ-MOP" id="9Ya-l3-aNl"/>
+                        <outlet property="visualEffectControl" destination="Ahz-IM-QjD" id="NVV-gY-B58"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

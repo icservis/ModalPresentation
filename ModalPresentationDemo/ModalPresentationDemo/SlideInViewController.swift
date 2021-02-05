@@ -9,7 +9,12 @@ import UIKit
 import ModalPresentation
 
 class SlideInViewController: UIViewController {
-    lazy var presenter = SlideInPresentationCoordinator()
+    lazy var presenter: SlideInPresentationCoordinator = {
+        let presenter = SlideInPresentationCoordinator()
+        presenter.proportion = .full
+        presenter.visualEffect = .blur(style: .regular)
+        return presenter
+    }()
 
     enum SegueIdentifier: String {
         case openModal = "openModal"
@@ -18,9 +23,14 @@ class SlideInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Base View Controller"
-        guard let background = UIImage(named: "background") else { return }
+        guard let background = UIImage(named: "light") else { return }
         self.view.backgroundColor = UIColor(patternImage: background)
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        visualEffectControl.selectedSegmentIndex = presenter.visualEffect.visualEffectControlSegmentIndex
+        changeVisualEffetSettings()
     }
 
     @IBOutlet weak var proportionControl: UISlider! {
@@ -46,9 +56,67 @@ class SlideInViewController: UIViewController {
         presenter.direction = direction
     }
 
+    @IBOutlet weak var visualEffectControl: UISegmentedControl! {
+        didSet {
+
+        }
+    }
+
+    @IBAction func visualEffectChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            let alpha = CGFloat(dimmingAlphaControl.value)
+            presenter.visualEffect = .dimming(alpha: alpha)
+        case 1:
+            guard let style = UIBlurEffect.Style(rawValue: blurStyleControl.selectedSegmentIndex) else { return }
+            presenter.visualEffect = .blur(style: style)
+        default:
+            break
+        }
+        changeVisualEffetSettings()
+    }
+
+    @IBOutlet weak var dimmingAlphaControl: UISlider! {
+        didSet {
+            dimmingAlphaControl.minimumValue = 0
+            dimmingAlphaControl.maximumValue = 1
+        }
+    }
+
+    @IBAction func dimmingAlphaChanged(_ sender: UISlider) {
+        let alpha = CGFloat(sender.value)
+        presenter.visualEffect = .dimming(alpha: alpha)
+    }
+
+    @IBOutlet weak var blurStyleControl: UISegmentedControl! {
+        didSet {
+
+        }
+    }
+
+    @IBAction func blurStyleChanged(_ sender: UISegmentedControl) {
+        let style = UIBlurEffect.Style.style(for: sender.selectedSegmentIndex)
+        presenter.visualEffect = .blur(style: style)
+    }
+
+    private func changeVisualEffetSettings() {
+        switch presenter.visualEffect {
+        case let .dimming(alpha: alpha):
+            dimmingAlphaControl.value = Float(alpha)
+
+            dimmingAlphaControl.isHidden = false
+            blurStyleControl.isHidden = true
+        case let .blur(style: style):
+            blurStyleControl.selectedSegmentIndex = min(style.selectedIndex, blurStyleControl.numberOfSegments)
+
+            blurStyleControl.isHidden = false
+            dimmingAlphaControl.isHidden = true
+        }
+    }
+
     @IBOutlet weak var openButton: UIButton! {
         didSet {
-            openButton.setTitleColor(.white, for: .normal)
+            openButton.setTitleColor(.black, for: .normal)
         }
     }
 
@@ -66,8 +134,49 @@ class SlideInViewController: UIViewController {
         case .openModal:
             presentedViewController.modalPresentationStyle = .custom
             presentedViewController.transitioningDelegate = presenter
-            presenter.proportion = .full
-            presenter.visualEffect = .blur(style: .regular)
+        }
+    }
+}
+
+extension SlideInPresentationVisualEffect {
+    var visualEffectControlSegmentIndex: Int {
+        switch self {
+        case .dimming:
+            return 0
+        case .blur:
+            return 1
+        }
+    }
+}
+
+extension UIBlurEffect.Style {
+    var selectedIndex: Int {
+        switch self {
+        case .extraLight:
+            return 0
+        case .light:
+            return 1
+        case .dark:
+            return 2
+        case .regular:
+            return 3
+        default:
+            return 4
+        }
+    }
+
+    static func style(for selectedIndex: Int) -> UIBlurEffect.Style {
+        switch selectedIndex {
+        case 0:
+            return UIBlurEffect.Style.extraLight
+        case 1:
+            return UIBlurEffect.Style.light
+        case 2:
+            return UIBlurEffect.Style.dark
+        case 3:
+            return UIBlurEffect.Style.regular
+        default:
+            return UIBlurEffect.Style.prominent
         }
     }
 }

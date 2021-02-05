@@ -38,7 +38,7 @@ public enum SlideInPresentationProportion {
         }
     }
 
-    var reversedValue: Value {
+    public var reversedValue: Value {
         return 1 - self.value
     }
 }

@@ -9,7 +9,11 @@ import UIKit
 import ModalPresentation
 
 class PopUpViewController: UIViewController {
-    lazy var presenter = PopUpPresentationCoordinator()
+    lazy var presenter: PopUpPresentationCoordinator = {
+        let presenter = PopUpPresentationCoordinator()
+        presenter.visualEffect = .blur(style: .regular)
+        return presenter
+    }()
 
     enum SegueIdentifier: String {
         case openPopup = "openPopup"
@@ -18,7 +22,7 @@ class PopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Base View Controller"
-        guard let background = UIImage(named: "background") else { return }
+        guard let background = UIImage(named: "dark") else { return }
         self.view.backgroundColor = UIColor(patternImage: background)
 
     }
@@ -42,9 +46,7 @@ class PopUpViewController: UIViewController {
         switch identifier {
         case .openPopup:
             presentedViewController.modalPresentationStyle = .custom
-            presentedViewController.modalTransitionStyle = .crossDissolve
             presentedViewController.transitioningDelegate = presenter
-            presenter.visualEffect = .dimming(alpha: 0.5)
         }
     }
 }
