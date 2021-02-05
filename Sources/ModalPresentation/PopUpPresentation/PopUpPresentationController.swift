@@ -52,7 +52,7 @@ public class PopUpPresentationController: UIPresentationController {
 
     private var interactionController: UIPercentDrivenInteractiveTransition? {
         didSet {
-            guard let coordinator = presentedViewController.transitioningDelegate as? SlideInPresentationCoordinator else { return }
+            guard let coordinator = presentedViewController.transitioningDelegate as? PopUpPresentationCoordinator else { return }
             coordinator.interactionController = interactionController
         }
     }

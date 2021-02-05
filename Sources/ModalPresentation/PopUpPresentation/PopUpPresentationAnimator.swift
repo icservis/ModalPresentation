@@ -17,7 +17,7 @@ public class PopUpPresentationAnimator: NSObject {
 
 extension PopUpPresentationAnimator: UIViewControllerAnimatedTransitioning {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 0.25
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -27,18 +27,15 @@ extension PopUpPresentationAnimator: UIViewControllerAnimatedTransitioning {
             transitionContext.containerView.addSubview(controller.view)
         }
 
-        let presentedFrame = transitionContext.finalFrame(for: controller)
-        let dismissedFrame = presentedFrame
-
         let initialFrame: CGRect
         let finalFrame: CGRect
         switch phase {
         case .presentation:
-            initialFrame = dismissedFrame
-            finalFrame = presentedFrame
+            initialFrame = transitionContext.initialFrame(for: controller)
+            finalFrame = transitionContext.finalFrame(for: controller)
         case .dismissal:
-            initialFrame = presentedFrame
-            finalFrame = dismissedFrame
+            initialFrame = transitionContext.finalFrame(for: controller)
+            finalFrame = transitionContext.initialFrame(for: controller)
         }
 
         let animationDuration = transitionDuration(using: transitionContext)
