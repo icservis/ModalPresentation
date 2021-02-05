@@ -27,7 +27,7 @@ public enum SlideInPresentationProportion {
         self = SlideInPresentationProportion.value(value)
     }
 
-    var value: Value {
+    public var value: Value {
         switch self {
         case .normal:
             return 0.45

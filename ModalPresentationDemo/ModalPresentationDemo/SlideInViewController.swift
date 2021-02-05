@@ -27,7 +27,7 @@ class SlideInViewController: UIViewController {
         didSet {
             proportionControl.minimumValue = 0
             proportionControl.maximumValue = 1
-            proportionControl.value = 0.4
+            proportionControl.value = Float(presenter.proportion.value)
         }
     }
     @IBAction func proportionValueChanged(_ sender: UISlider) {
@@ -37,7 +37,7 @@ class SlideInViewController: UIViewController {
 
     @IBOutlet weak var directionControl: UISegmentedControl! {
         didSet {
-            directionControl.selectedSegmentIndex = 3
+            directionControl.selectedSegmentIndex = presenter.direction.rawValue
         }
     }
 
