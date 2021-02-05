@@ -47,7 +47,7 @@ class SlideInViewController: UIViewController {
         guard
             let identifierValue = segue.identifier,
             let identifier = SegueIdentifier(rawValue: identifierValue),
-            let presentingViewController = segue.source as? SlideInViewController,
+            // let presentingViewController = segue.source as? SlideInViewController,
             let presentedViewController = segue.destination as? SlideInModalViewController
         else {
             super.prepare(for: segue, sender: sender)
@@ -56,7 +56,9 @@ class SlideInViewController: UIViewController {
         switch identifier {
         case .openModal:
             presentedViewController.modalPresentationStyle = .custom
-            presentedViewController.transitioningDelegate = presentingViewController.presenter
+            presentedViewController.transitioningDelegate = presenter
+            presenter.proportion = .full
+            presenter.dimmingEffect = .blur(style: .dark)
         }
     }
 }
