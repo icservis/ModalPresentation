@@ -11,7 +11,7 @@ import UIKit
 public class SlideInPresentationCoordinator: NSObject {
     public var direction: SlideInPresentationDirection = .bottom
     public var proportion: SlideInPresentationProportion = .normal
-    public var dimmingEffect: SlideInPresentationDimmingEffect = .dimming(alpha: 0.5)
+    public var visualEffect: SlideInPresentationVisualEffect = .dimming(alpha: 0.5)
     public var disableCompactVerticalSize = false
 
     weak var interactionController: UIPercentDrivenInteractiveTransition?
@@ -29,7 +29,7 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
             presenting: presenting,
             direction: direction,
             proportion: proportion,
-            dimmingEffect: dimmingEffect
+            visualEffect: visualEffect
         )
         presentationController.delegate = self
         return presentationController

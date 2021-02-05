@@ -14,7 +14,7 @@
 		84408FF825CC7F5A00BDD188 /* libModalPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84408FD625CC7ECE00BDD188 /* libModalPresentation.a */; };
 		845242A125CC4CF10042D09E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A025CC4CF10042D09E /* AppDelegate.swift */; };
 		845242A325CC4CF10042D09E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A225CC4CF10042D09E /* SceneDelegate.swift */; };
-		845242A525CC4CF10042D09E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A425CC4CF10042D09E /* ViewController.swift */; };
+		845242A525CC4CF10042D09E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A425CC4CF10042D09E /* TabBarController.swift */; };
 		845242A825CC4CF10042D09E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845242A625CC4CF10042D09E /* Main.storyboard */; };
 		845242AA25CC4CF40042D09E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845242A925CC4CF40042D09E /* Assets.xcassets */; };
 		845242AD25CC4CF40042D09E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845242AB25CC4CF40042D09E /* LaunchScreen.storyboard */; };
@@ -71,7 +71,7 @@
 		8452429D25CC4CF10042D09E /* ModalPresentationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModalPresentationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845242A025CC4CF10042D09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		845242A225CC4CF10042D09E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		845242A425CC4CF10042D09E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		845242A425CC4CF10042D09E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		845242A725CC4CF10042D09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		845242A925CC4CF40042D09E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		845242AC25CC4CF40042D09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -183,17 +183,17 @@
 		8452429F25CC4CF10042D09E /* ModalPresentationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				845242AE25CC4CF40042D09E /* Info.plist */,
+				845242A025CC4CF10042D09E /* AppDelegate.swift */,
 				845242DD25CC4DF50042D09E /* PopUpModalViewController.swift */,
 				845242DC25CC4DF50042D09E /* PopUpViewController.swift */,
+				845242A225CC4CF10042D09E /* SceneDelegate.swift */,
 				845242DE25CC4DF50042D09E /* SlideInModalViewController.swift */,
 				845242DF25CC4DF50042D09E /* SlideInViewController.swift */,
-				845242A025CC4CF10042D09E /* AppDelegate.swift */,
-				845242A225CC4CF10042D09E /* SceneDelegate.swift */,
-				845242A425CC4CF10042D09E /* ViewController.swift */,
-				845242A625CC4CF10042D09E /* Main.storyboard */,
+				845242A425CC4CF10042D09E /* TabBarController.swift */,
 				845242A925CC4CF40042D09E /* Assets.xcassets */,
 				845242AB25CC4CF40042D09E /* LaunchScreen.storyboard */,
-				845242AE25CC4CF40042D09E /* Info.plist */,
+				845242A625CC4CF10042D09E /* Main.storyboard */,
 			);
 			path = ModalPresentationDemo;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				845242E225CC4DF50042D09E /* SlideInModalViewController.swift in Sources */,
-				845242A525CC4CF10042D09E /* ViewController.swift in Sources */,
+				845242A525CC4CF10042D09E /* TabBarController.swift in Sources */,
 				845242A125CC4CF10042D09E /* AppDelegate.swift in Sources */,
 				845242E125CC4DF50042D09E /* PopUpModalViewController.swift in Sources */,
 				845242E325CC4DF50042D09E /* SlideInViewController.swift in Sources */,

@@ -43,7 +43,7 @@ public enum SlideInPresentationProportion {
     }
 }
 
-public enum SlideInPresentationDimmingEffect {
+public enum SlideInPresentationVisualEffect {
     case dimming(alpha: CGFloat)
     case blur(style: UIBlurEffect.Style)
 }
@@ -58,18 +58,18 @@ public enum SlideInPresentationTransitionPhase {
 public class SlideInPresentationController: UIPresentationController {
     private let direction: SlideInPresentationDirection
     private let proportion: SlideInPresentationProportion
-    private let dimmingEffect: SlideInPresentationDimmingEffect
+    private let visualEffect: SlideInPresentationVisualEffect
 
     init(
         presentedViewController: UIViewController,
         presenting presentingViewController: UIViewController?,
         direction: SlideInPresentationDirection,
         proportion: SlideInPresentationProportion,
-        dimmingEffect: SlideInPresentationDimmingEffect
+        visualEffect: SlideInPresentationVisualEffect
     ) {
         self.direction = direction
         self.proportion = proportion
-        self.dimmingEffect = dimmingEffect
+        self.visualEffect = visualEffect
         super.init(
             presentedViewController: presentedViewController,
             presenting: presentingViewController
@@ -86,7 +86,7 @@ public class SlideInPresentationController: UIPresentationController {
     }
 
     lazy private var dimmingView: UIView = {
-        guard case let .dimming(alpha) = dimmingEffect else { fatalError() }
+        guard case let .dimming(alpha) = visualEffect else { fatalError() }
         let dimmingView = UIView()
         dimmingView.backgroundColor = UIColor(white: 0.0, alpha: alpha)
         dimmingView.alpha = 0.0
@@ -94,11 +94,10 @@ public class SlideInPresentationController: UIPresentationController {
     }()
 
     lazy private var blurView: UIVisualEffectView = {
-        guard case let .blur(style) = dimmingEffect else { fatalError() }
+        guard case let .blur(style) = visualEffect else { fatalError() }
         let blurEffect = UIBlurEffect(style: style)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.backgroundColor = .clear
-        blurView.alpha = 1.0
         return blurView
     }()
 
@@ -108,7 +107,7 @@ public class SlideInPresentationController: UIPresentationController {
             action: #selector(handleTap)
         )
 
-        switch dimmingEffect {
+        switch visualEffect {
         case .dimming:
             dimmingView.addGestureRecognizer(recogniser)
         case .blur:
@@ -172,7 +171,7 @@ public class SlideInPresentationController: UIPresentationController {
         super.presentationTransitionWillBegin()
 
         guard let containerView = containerView else { return }
-        switch dimmingEffect {
+        switch visualEffect {
         case .dimming:
             dimmingView.translatesAutoresizingMaskIntoConstraints = false
             containerView.insertSubview(dimmingView, at: 0)
@@ -196,15 +195,22 @@ public class SlideInPresentationController: UIPresentationController {
         }
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
-            if case .dimming = dimmingEffect {
+            switch visualEffect {
+            case .dimming:
                 dimmingView.alpha = 1.0
+            case .blur:
+                break
             }
             return
         }
         coordinator.animate(
-            alongsideTransition: { (context) in
-                if case .dimming = self.dimmingEffect {
+            alongsideTransition: { [weak self] context in
+                guard let self = self else { return }
+                switch self.visualEffect {
+                case .dimming:
                     self.dimmingView.alpha = 1.0
+                case .blur:
+                    break
                 }
             },
             completion: nil
@@ -215,7 +221,7 @@ public class SlideInPresentationController: UIPresentationController {
         super.presentationTransitionDidEnd(completed)
 
         if !completed {
-            switch dimmingEffect {
+            switch visualEffect {
             case .dimming:
                 dimmingView.removeFromSuperview()
             case .blur:
@@ -228,15 +234,22 @@ public class SlideInPresentationController: UIPresentationController {
         super.dismissalTransitionWillBegin()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
-            if case .dimming = dimmingEffect {
-                dimmingView.alpha = 0.0
+            switch self.visualEffect {
+            case .dimming:
+                self.dimmingView.alpha = 0.0
+            case .blur:
+                break
             }
             return
         }
         coordinator.animate(
-            alongsideTransition: { (context) in
-                if case .dimming = self.dimmingEffect {
+            alongsideTransition: { [weak self] context in
+                guard let self = self else { return }
+                switch self.visualEffect {
+                case .dimming:
                     self.dimmingView.alpha = 0.0
+                case .blur:
+                    break
                 }
             },
             completion: nil
@@ -247,7 +260,7 @@ public class SlideInPresentationController: UIPresentationController {
         super.dismissalTransitionDidEnd(completed)
 
         if completed {
-            switch dimmingEffect {
+            switch visualEffect {
             case .dimming:
                 self.dimmingView.removeFromSuperview()
             case .blur:
@@ -290,12 +303,15 @@ public class SlideInPresentationController: UIPresentationController {
             withParentContainerSize: containerView.bounds.size
         )
         switch direction {
+        case .left:
+            frame.origin.x = .zero
+        case .top:
+            frame.origin.y = .zero
         case .right:
             frame.origin.x = containerView.frame.width * proportion.reversedValue
         case .bottom:
             frame.origin.y = containerView.frame.height * proportion.reversedValue
-        default:
-            frame.origin = .zero
+
         }
         return frame
     }

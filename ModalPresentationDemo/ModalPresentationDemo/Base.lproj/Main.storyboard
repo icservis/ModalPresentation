@@ -30,7 +30,7 @@
         <!--PopUp-->
         <scene sceneID="F0D-IY-M3W">
             <objects>
-                <viewController id="pW1-w7-EeS" customClass="PopUpViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pW1-w7-EeS" customClass="PopUpViewController" customModule="ModalPresentationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UO0-Bm-vYl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +61,7 @@
         <!--Pop Up Modal View Controller-->
         <scene sceneID="L8o-Az-BLD">
             <objects>
-                <viewController id="pw9-Sv-EwO" customClass="PopUpModalViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pw9-Sv-EwO" customClass="PopUpModalViewController" customModule="ModalPresentationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t7M-RX-9US">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
         <!--SlideIn-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="SlideIn" id="BYZ-38-t0r" customClass="SlideInViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SlideIn" id="BYZ-38-t0r" customClass="SlideInViewController" customModule="ModalPresentationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,6 +122,7 @@
                     <tabBarItem key="tabBarItem" title="SlideIn" image="square.and.arrow.up" catalog="system" id="q7K-nb-uZx"/>
                     <connections>
                         <outlet property="directionControl" destination="JPX-g3-yFM" id="4hG-iU-s6D"/>
+                        <outlet property="openButton" destination="eZZ-aF-G0c" id="8LU-Yq-qT7"/>
                         <outlet property="proportionControl" destination="JCh-gJ-MOP" id="9Ya-l3-aNl"/>
                     </connections>
                 </viewController>
@@ -132,7 +133,7 @@
         <!--Slide In Modal View Controller-->
         <scene sceneID="drr-x6-tHD">
             <objects>
-                <viewController id="2Ac-Xi-OaG" customClass="SlideInModalViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2Ac-Xi-OaG" customClass="SlideInModalViewController" customModule="ModalPresentationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EQ7-lV-hW1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

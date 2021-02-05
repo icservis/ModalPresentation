@@ -18,6 +18,9 @@ class SlideInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Base View Controller"
+        guard let background = UIImage(named: "background") else { return }
+        self.view.backgroundColor = UIColor(patternImage: background)
+
     }
 
     @IBOutlet weak var proportionControl: UISlider! {
@@ -43,6 +46,11 @@ class SlideInViewController: UIViewController {
         presenter.direction = direction
     }
 
+    @IBOutlet weak var openButton: UIButton! {
+        didSet {
+            openButton.setTitleColor(.white, for: .normal)
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let identifierValue = segue.identifier,
@@ -58,7 +66,7 @@ class SlideInViewController: UIViewController {
             presentedViewController.modalPresentationStyle = .custom
             presentedViewController.transitioningDelegate = presenter
             presenter.proportion = .full
-            presenter.dimmingEffect = .blur(style: .dark)
+            presenter.visualEffect = .blur(style: .regular)
         }
     }
 }
