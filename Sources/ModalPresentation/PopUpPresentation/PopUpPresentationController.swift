@@ -1,86 +1,58 @@
 //
-//  SlideInPresentationController.swift
-//  ping-pong
+//  PopUpPresentationController.swift
+//  ModalPresentation
 //
-//  Created by Libor Kučera on 31.01.2021.
-//  Copyright © 2021 IC Servis, s.r.o. All rights reserved.
+//  Created by Libor Kučera on 05.02.2021.
 //
 
 import UIKit
 
-public enum SlideInPresentationDirection: Int {
-    case left = 0
-    case top
-    case right
-    case bottom
+public enum PopUpPresentationPosition {
+    case middle(
+            aspectRatio: CGFloat,
+            relativeSize: CGFloat
+         )
+    case position(
+            centerX: CGPoint,
+            centerY: CGPoint,
+            aspectRatio: CGFloat,
+            relativeSize: CGFloat
+         )
+    case value(_ frame: CGRect)
 }
 
-public enum SlideInPresentationProportion {
-    public typealias Value = CGFloat
-    case normal
-    case full
-    case value(Value)
-
-    public init?(value: Value) {
-        let range: ClosedRange<Value> = (0...1)
-        precondition(range.contains(value))
-        self = SlideInPresentationProportion.value(value)
-    }
-
-    public var value: Value {
-        switch self {
-        case .normal:
-            return 0.45
-        case .full:
-            return 0.9
-        case let .value(value):
-            return value
-        }
-    }
-
-    public var reversedValue: Value {
-        return 1 - self.value
-    }
-}
-
-public enum SlideInPresentationVisualEffect {
+public enum PopUpPresentationVisualEffect {
     case dimming(alpha: CGFloat)
     case blur(style: UIBlurEffect.Style)
 }
 
-public enum SlideInPresentationTransitionPhase {
+public enum PopUpPresentationTransitionPhase {
     case presentation
     // case management
     case dismissal
 }
 
-
-public class SlideInPresentationController: UIPresentationController {
-    private let direction: SlideInPresentationDirection
-    private let proportion: SlideInPresentationProportion
-    private let visualEffect: SlideInPresentationVisualEffect
+public class PopUpPresentationController: UIPresentationController {
+    private let position: PopUpPresentationPosition
+    private let visualEffect: PopUpPresentationVisualEffect
 
     init(
         presentedViewController: UIViewController,
         presenting presentingViewController: UIViewController?,
-        direction: SlideInPresentationDirection,
-        proportion: SlideInPresentationProportion,
-        visualEffect: SlideInPresentationVisualEffect
+        position: PopUpPresentationPosition,
+        visualEffect: PopUpPresentationVisualEffect
     ) {
-        self.direction = direction
-        self.proportion = proportion
+        self.position = position
         self.visualEffect = visualEffect
         super.init(
             presentedViewController: presentedViewController,
             presenting: presentingViewController
         )
-        self.setupTapGesture()
-        self.setupPanGesture()
     }
 
     private var interactionController: UIPercentDrivenInteractiveTransition? {
         didSet {
-            guard let coordinator = presentedViewController.transitioningDelegate as? SlideInPresentationCoordinator else { return }
+            guard let coordinator = presentedViewController.transitioningDelegate as? PopUpPresentationCoordinator else { return }
             coordinator.interactionController = interactionController
         }
     }
@@ -117,54 +89,6 @@ public class SlideInPresentationController: UIPresentationController {
 
     @objc private func handleTap() {
         presentingViewController.dismiss(animated: true, completion: nil)
-    }
-
-    private func setupPanGesture() {
-        let recogniser = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-        presentedViewController.view.addGestureRecognizer(recogniser)
-    }
-
-    @objc private func handleGesture(_ gesture: UIPanGestureRecognizer) {
-        let translate = gesture.translation(in: gesture.view)
-        let percent: CGFloat
-        switch direction {
-        case .left:
-            percent = -translate.x / gesture.view!.bounds.size.width
-        case .right:
-            percent = translate.x / gesture.view!.bounds.size.width
-        case .top:
-            percent = -translate.y / gesture.view!.bounds.size.height
-        case .bottom:
-            percent = translate.y / gesture.view!.bounds.size.height
-        }
-
-        if gesture.state == .began {
-            interactionController = UIPercentDrivenInteractiveTransition()
-            presentingViewController.dismiss(animated: true, completion: nil)
-        } else if gesture.state == .changed {
-            interactionController?.update(percent)
-        } else if gesture.state == .cancelled {
-            interactionController?.cancel()
-        } else if gesture.state == .ended {
-            let velocity = gesture.velocity(in: gesture.view)
-            let condition: Bool
-            switch direction {
-            case .left:
-                condition = (percent > 0.5 && velocity.x == 0) || velocity.x < 0
-            case .top:
-                condition = (percent > 0.5 && velocity.y == 0) || velocity.y < 0
-            case .right:
-                condition = (percent > 0.5 && velocity.x == 0) || velocity.x > 0
-            case .bottom:
-                condition = (percent > 0.5 && velocity.y == 0) || velocity.y > 0
-            }
-            if condition {
-                interactionController?.finish()
-            } else {
-                interactionController?.cancel()
-            }
-            interactionController = nil
-        }
     }
 
     public override func presentationTransitionWillBegin() {
@@ -279,18 +203,10 @@ public class SlideInPresentationController: UIPresentationController {
         forChildContentContainer container: UIContentContainer,
         withParentContainerSize parentSize: CGSize
     ) -> CGSize {
-        switch direction {
-        case .left, .right:
-            return CGSize(
-                width: parentSize.width * proportion.value,
-                height: parentSize.height
-            )
-        case .top, .bottom:
-            return CGSize(
-                width: parentSize.width,
-                height: parentSize.height * proportion.value
-            )
-        }
+        return CGSize(
+            width: parentSize.width,
+            height: parentSize.height
+        )
     }
 
     public override var frameOfPresentedViewInContainerView: CGRect {
@@ -302,17 +218,6 @@ public class SlideInPresentationController: UIPresentationController {
             forChildContentContainer: presentedViewController,
             withParentContainerSize: containerView.bounds.size
         )
-        switch direction {
-        case .left:
-            frame.origin.x = .zero
-        case .top:
-            frame.origin.y = .zero
-        case .right:
-            frame.origin.x = containerView.frame.width * proportion.reversedValue
-        case .bottom:
-            frame.origin.y = containerView.frame.height * proportion.reversedValue
-
-        }
         return frame
     }
 }

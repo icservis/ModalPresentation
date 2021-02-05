@@ -2,7 +2,7 @@
 
 Custom Modal Presenantion Controllers:
 
-• SlideInPresentetion
-• PopOverPresenatiton
+#### SlideInPresentetion
+#### PopOverPresenatiton
 
-See demo project fro usage
+See demo project for usage
