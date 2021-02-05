@@ -6,24 +6,45 @@
 //
 
 import UIKit
+import ModalPresentation
 
 class PopUpViewController: UIViewController {
+    lazy var presenter = PopUpPresentationCoordinator()
+
+    enum SegueIdentifier: String {
+        case openPopup = "openPopup"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Base View Controller"
+        guard let background = UIImage(named: "background") else { return }
+        self.view.backgroundColor = UIColor(patternImage: background)
 
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
+    @IBOutlet weak var openButton: UIButton! {
+        didSet {
+            openButton.setTitleColor(.white, for: .normal)
+        }
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard
+            let identifierValue = segue.identifier,
+            let identifier = SegueIdentifier(rawValue: identifierValue),
+            // let presentingViewController = segue.source as? PopUpViewController,
+            let presentedViewController = segue.destination as? PopUpModalViewController
+        else {
+            super.prepare(for: segue, sender: sender)
+            return
+        }
+        switch identifier {
+        case .openPopup:
+            presentedViewController.modalPresentationStyle = .custom
+            presentedViewController.modalTransitionStyle = .crossDissolve
+            presentedViewController.transitioningDelegate = presenter
+            presenter.visualEffect = .dimming(alpha: 0.5)
+        }
     }
-    */
-
 }

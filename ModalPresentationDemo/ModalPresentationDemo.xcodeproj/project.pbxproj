@@ -10,8 +10,10 @@
 		84408FE725CC7EEB00BDD188 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE225CC7EEB00BDD188 /* SlideInPresentationAnimator.swift */; };
 		84408FE825CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE325CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift */; };
 		84408FE925CC7EEB00BDD188 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE425CC7EEB00BDD188 /* SlideInPresentationController.swift */; };
-		84408FEA25CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */; };
+		84408FEA25CC7EEB00BDD188 /* PopUpPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84408FE625CC7EEB00BDD188 /* PopUpPresentationCoordinator.swift */; };
 		84408FF825CC7F5A00BDD188 /* libModalPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84408FD625CC7ECE00BDD188 /* libModalPresentation.a */; };
+		8440915125CD5D2600BDD188 /* PopUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440915025CD5D2600BDD188 /* PopUpPresentationController.swift */; };
+		8440918825CD6E0600BDD188 /* PopUpPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440918725CD6E0600BDD188 /* PopUpPresentationAnimator.swift */; };
 		845242A125CC4CF10042D09E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A025CC4CF10042D09E /* AppDelegate.swift */; };
 		845242A325CC4CF10042D09E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A225CC4CF10042D09E /* SceneDelegate.swift */; };
 		845242A525CC4CF10042D09E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845242A425CC4CF10042D09E /* TabBarController.swift */; };
@@ -67,7 +69,9 @@
 		84408FE225CC7EEB00BDD188 /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
 		84408FE325CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationCoordinator.swift; sourceTree = "<group>"; };
 		84408FE425CC7EEB00BDD188 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
-		84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverPresentationCoordinator.swift; sourceTree = "<group>"; };
+		84408FE625CC7EEB00BDD188 /* PopUpPresentationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpPresentationCoordinator.swift; sourceTree = "<group>"; };
+		8440915025CD5D2600BDD188 /* PopUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationController.swift; sourceTree = "<group>"; };
+		8440918725CD6E0600BDD188 /* PopUpPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationAnimator.swift; sourceTree = "<group>"; };
 		8452429D25CC4CF10042D09E /* ModalPresentationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModalPresentationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845242A025CC4CF10042D09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		845242A225CC4CF10042D09E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,7 +128,7 @@
 		84408FD725CC7ECE00BDD188 /* ModalPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				84408FE525CC7EEB00BDD188 /* PopOverPresentation */,
+				84408FE525CC7EEB00BDD188 /* PopUpPresentation */,
 				84408FE125CC7EEB00BDD188 /* SlideInPresentation */,
 			);
 			path = ModalPresentation;
@@ -141,13 +145,15 @@
 			path = ../../Sources/ModalPresentation/SlideInPresentation;
 			sourceTree = "<group>";
 		};
-		84408FE525CC7EEB00BDD188 /* PopOverPresentation */ = {
+		84408FE525CC7EEB00BDD188 /* PopUpPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				84408FE625CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift */,
+				84408FE625CC7EEB00BDD188 /* PopUpPresentationCoordinator.swift */,
+				8440915025CD5D2600BDD188 /* PopUpPresentationController.swift */,
+				8440918725CD6E0600BDD188 /* PopUpPresentationAnimator.swift */,
 			);
-			name = PopOverPresentation;
-			path = ../../Sources/ModalPresentation/PopOverPresentation;
+			name = PopUpPresentation;
+			path = ../../Sources/ModalPresentation/PopUpPresentation;
 			sourceTree = "<group>";
 		};
 		84408FF725CC7F5A00BDD188 /* Frameworks */ = {
@@ -372,9 +378,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84408FEA25CC7EEB00BDD188 /* PopOverPresentationCoordinator.swift in Sources */,
+				8440918825CD6E0600BDD188 /* PopUpPresentationAnimator.swift in Sources */,
+				84408FEA25CC7EEB00BDD188 /* PopUpPresentationCoordinator.swift in Sources */,
 				84408FE825CC7EEB00BDD188 /* SlideInPresentationCoordinator.swift in Sources */,
 				84408FE925CC7EEB00BDD188 /* SlideInPresentationController.swift in Sources */,
+				8440915125CD5D2600BDD188 /* PopUpPresentationController.swift in Sources */,
 				84408FE725CC7EEB00BDD188 /* SlideInPresentationAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

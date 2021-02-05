@@ -51,6 +51,7 @@ class SlideInViewController: UIViewController {
             openButton.setTitleColor(.white, for: .normal)
         }
     }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let identifierValue = segue.identifier,
