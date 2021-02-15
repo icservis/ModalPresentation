@@ -8,9 +8,9 @@
 import UIKit
 
 public class PopUpPresentationAnimator: NSObject {
-    private let phase: PopUpPresentationTransitionPhase
+    private let phase: UIViewControllerAnimatedTransitioningPhase
 
-    init(phase: PopUpPresentationTransitionPhase) {
+    init(phase: UIViewControllerAnimatedTransitioningPhase) {
         self.phase = phase
     }
 }
@@ -21,7 +21,7 @@ extension PopUpPresentationAnimator: UIViewControllerAnimatedTransitioning {
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let controller = transitionContext.viewController(forKey: phase.key) else { return }
+        guard let controller = transitionContext.viewController(forKey: phase.transitionContextViewControllerKey) else { return }
 
         if case .presentation = phase {
             transitionContext.containerView.addSubview(controller.view)
@@ -52,16 +52,5 @@ extension PopUpPresentationAnimator: UIViewControllerAnimatedTransitioning {
                 transitionContext.completeTransition(finished)
             }
         )
-    }
-}
-
-public extension PopUpPresentationTransitionPhase {
-    var key: UITransitionContextViewControllerKey {
-        switch self {
-        case .presentation:
-            return .to
-        case .dismissal:
-            return .from
-        }
     }
 }

@@ -11,7 +11,8 @@ import ModalPresentation
 class SlideInViewController: UIViewController {
     lazy var presenter: SlideInPresentationCoordinator = {
         let presenter = SlideInPresentationCoordinator()
-        presenter.proportion = .full
+        presenter.type = .sheet
+        presenter.length = .full
         presenter.visualEffect = .blur(style: .regular)
         return presenter
     }()
@@ -37,12 +38,12 @@ class SlideInViewController: UIViewController {
         didSet {
             proportionControl.minimumValue = 0
             proportionControl.maximumValue = 1
-            proportionControl.value = Float(presenter.proportion.value)
+            proportionControl.value = Float(presenter.length.value)
         }
     }
     @IBAction func proportionValueChanged(_ sender: UISlider) {
-        guard let proportion = SlideInPresentationProportion(value: CGFloat(sender.value)) else { return }
-        presenter.proportion = proportion
+        guard let length = SlideInPresentationLength(value: CGFloat(sender.value)) else { return }
+        presenter.length = length
     }
 
     @IBOutlet weak var directionControl: UISegmentedControl! {

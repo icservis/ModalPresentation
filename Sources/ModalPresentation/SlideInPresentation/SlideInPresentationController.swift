@@ -8,6 +8,30 @@
 
 import UIKit
 
+public enum SlideInPresentationType {
+    public typealias Value = CGFloat
+    case page
+    case sheet
+    case custom(Value)
+
+    public init?(value: Value) {
+        let range: ClosedRange<Value> = (0...1)
+        precondition(range.contains(value))
+        self = SlideInPresentationType.custom(value)
+    }
+
+    public var value: Value {
+        switch self {
+        case .page:
+            return 1
+        case .sheet:
+            return 0.95
+        case let .custom(value):
+            return value
+        }
+    }
+}
+
 public enum SlideInPresentationDirection: Int {
     case left = 0
     case top
@@ -15,7 +39,7 @@ public enum SlideInPresentationDirection: Int {
     case bottom
 }
 
-public enum SlideInPresentationProportion {
+public enum SlideInPresentationLength {
     public typealias Value = CGFloat
     case normal
     case full
@@ -24,22 +48,18 @@ public enum SlideInPresentationProportion {
     public init?(value: Value) {
         let range: ClosedRange<Value> = (0...1)
         precondition(range.contains(value))
-        self = SlideInPresentationProportion.value(value)
+        self = SlideInPresentationLength.value(value)
     }
 
     public var value: Value {
         switch self {
         case .normal:
-            return 0.45
+            return 0.475
         case .full:
-            return 0.9
+            return 0.95
         case let .value(value):
             return value
         }
-    }
-
-    public var reversedValue: Value {
-        return 1 - self.value
     }
 }
 
@@ -48,27 +68,23 @@ public enum SlideInPresentationVisualEffect {
     case blur(style: UIBlurEffect.Style)
 }
 
-public enum SlideInPresentationTransitionPhase {
-    case presentation
-    // case management
-    case dismissal
-}
-
-
 public class SlideInPresentationController: UIPresentationController {
+    private let type: SlideInPresentationType
     private let direction: SlideInPresentationDirection
-    private let proportion: SlideInPresentationProportion
+    private let length: SlideInPresentationLength
     private let visualEffect: SlideInPresentationVisualEffect
 
     init(
         presentedViewController: UIViewController,
         presenting presentingViewController: UIViewController?,
+        type: SlideInPresentationType,
         direction: SlideInPresentationDirection,
-        proportion: SlideInPresentationProportion,
+        length: SlideInPresentationLength,
         visualEffect: SlideInPresentationVisualEffect
     ) {
+        self.type = type
         self.direction = direction
-        self.proportion = proportion
+        self.length = length
         self.visualEffect = visualEffect
         super.init(
             presentedViewController: presentedViewController,
@@ -282,36 +298,39 @@ public class SlideInPresentationController: UIPresentationController {
         switch direction {
         case .left, .right:
             return CGSize(
-                width: parentSize.width * proportion.value,
-                height: parentSize.height
+                width: Int(parentSize.width * length.value),
+                height: Int(parentSize.height * type.value)
             )
         case .top, .bottom:
             return CGSize(
-                width: parentSize.width,
-                height: parentSize.height * proportion.value
+                width: Int(parentSize.width * type.value),
+                height: Int(parentSize.height * length.value)
             )
         }
     }
 
     public override var frameOfPresentedViewInContainerView: CGRect {
         var frame: CGRect = .zero
-        guard let containerView = containerView else {
-            return frame
-        }
+        guard let containerView = containerView else { return frame }
+
         frame.size = size(
             forChildContentContainer: presentedViewController,
             withParentContainerSize: containerView.bounds.size
         )
+
         switch direction {
         case .left:
             frame.origin.x = .zero
+            frame.origin.y = (containerView.frame.height - frame.height) / 2
         case .top:
+            frame.origin.x = (containerView.frame.width - frame.width) / 2
             frame.origin.y = .zero
         case .right:
-            frame.origin.x = containerView.frame.width * proportion.reversedValue
+            frame.origin.x = containerView.frame.width - frame.width
+            frame.origin.y = (containerView.frame.height - frame.height) / 2
         case .bottom:
-            frame.origin.y = containerView.frame.height * proportion.reversedValue
-
+            frame.origin.x = (containerView.frame.width - frame.width) / 2
+            frame.origin.y = containerView.frame.height - frame.height
         }
         return frame
     }

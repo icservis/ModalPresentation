@@ -10,9 +10,9 @@ import UIKit
 
 public class SlideInPresentationAnimator: NSObject {
     private let direction: SlideInPresentationDirection
-    private let phase: SlideInPresentationTransitionPhase
+    private let phase: UIViewControllerAnimatedTransitioningPhase
 
-    init(direction: SlideInPresentationDirection, phase: SlideInPresentationTransitionPhase) {
+    init(direction: SlideInPresentationDirection, phase: UIViewControllerAnimatedTransitioningPhase) {
         self.direction = direction
         self.phase = phase
     }
@@ -24,7 +24,7 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let controller = transitionContext.viewController(forKey: phase.key) else { return }
+        guard let controller = transitionContext.viewController(forKey: phase.transitionContextViewControllerKey) else { return }
 
         if case .presentation = phase {
             transitionContext.containerView.addSubview(controller.view)
@@ -71,13 +71,3 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     }
 }
 
-public extension SlideInPresentationTransitionPhase {
-    var key: UITransitionContextViewControllerKey {
-        switch self {
-        case .presentation:
-            return .to
-        case .dismissal:
-            return .from
-        }
-    }
-}

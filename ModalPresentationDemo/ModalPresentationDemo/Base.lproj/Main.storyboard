@@ -39,9 +39,7 @@
                                 <rect key="frame" x="140" y="743" width="134" height="30"/>
                                 <state key="normal" title="Open PopUp Modal"/>
                                 <connections>
-                                    <segue destination="pw9-Sv-EwO" kind="popoverPresentation" identifier="openPopup" popoverAnchorView="S3U-E3-qmc" id="wt7-Zi-Kci">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="pw9-Sv-EwO" kind="presentation" identifier="openModal" id="wt7-Zi-Kci"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -52,7 +50,7 @@
                             <constraint firstItem="8al-rC-6d5" firstAttribute="bottom" secondItem="S3U-E3-qmc" secondAttribute="bottom" constant="40" id="nEl-ge-f2a"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PopUp" image="folder.circle.fill" catalog="system" id="gIu-9A-Csj"/>
+                    <tabBarItem key="tabBarItem" title="PopUp" image="archivebox" catalog="system" id="gIu-9A-Csj"/>
                     <connections>
                         <outlet property="openButton" destination="S3U-E3-qmc" id="ZBK-pg-7pD"/>
                     </connections>
@@ -89,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Grs-Or-ZHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="771" y="823"/>
+            <point key="canvasLocation" x="769.56521739130437" y="822.99107142857144"/>
         </scene>
         <!--SlideIn-->
         <scene sceneID="tne-QT-ifu">
@@ -221,7 +219,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="folder.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

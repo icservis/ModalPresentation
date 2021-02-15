@@ -11,12 +11,15 @@ import ModalPresentation
 class PopUpViewController: UIViewController {
     lazy var presenter: PopUpPresentationCoordinator = {
         let presenter = PopUpPresentationCoordinator()
-        presenter.visualEffect = .blur(style: .regular)
+        presenter.position = .value(
+            CGRect(x: 65, y: 257, width: 284, height: 187)
+        )
+        presenter.visualEffect = .dimming(alpha: 0.5)
         return presenter
     }()
 
     enum SegueIdentifier: String {
-        case openPopup = "openPopup"
+        case openModal = "openModal"
     }
 
     override func viewDidLoad() {
@@ -44,7 +47,7 @@ class PopUpViewController: UIViewController {
             return
         }
         switch identifier {
-        case .openPopup:
+        case .openModal:
             presentedViewController.modalPresentationStyle = .custom
             presentedViewController.transitioningDelegate = presenter
         }

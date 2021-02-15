@@ -26,12 +26,6 @@ public enum PopUpPresentationVisualEffect {
     case blur(style: UIBlurEffect.Style)
 }
 
-public enum PopUpPresentationTransitionPhase {
-    case presentation
-    // case management
-    case dismissal
-}
-
 public class PopUpPresentationController: UIPresentationController {
     private let position: PopUpPresentationPosition
     private let visualEffect: PopUpPresentationVisualEffect
@@ -48,6 +42,7 @@ public class PopUpPresentationController: UIPresentationController {
             presentedViewController: presentedViewController,
             presenting: presentingViewController
         )
+        self.setupTapGesture()
     }
 
     private var interactionController: UIPercentDrivenInteractiveTransition? {
@@ -204,20 +199,23 @@ public class PopUpPresentationController: UIPresentationController {
         withParentContainerSize parentSize: CGSize
     ) -> CGSize {
         return CGSize(
-            width: parentSize.width,
-            height: parentSize.height
+            width: parentSize.width * 0.8,
+            height: parentSize.height * 0.8
         )
     }
 
     public override var frameOfPresentedViewInContainerView: CGRect {
         var frame: CGRect = .zero
-        guard let containerView = containerView else {
-            return frame
-        }
+
+        guard let containerView = self.containerView else { return frame }
+
         frame.size = size(
             forChildContentContainer: presentedViewController,
             withParentContainerSize: containerView.bounds.size
         )
+
+        frame.origin.x = (containerView.frame.width - frame.size.width) * 0.5
+        frame.origin.y = UIScreen.main.bounds.maxY - frame.size.height
         return frame
     }
 }
