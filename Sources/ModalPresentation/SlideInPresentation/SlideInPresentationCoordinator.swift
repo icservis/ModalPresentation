@@ -9,8 +9,9 @@
 import UIKit
 
 public class SlideInPresentationCoordinator: NSObject {
+    public var type: SlideInPresentationType = .sheet
     public var direction: SlideInPresentationDirection = .bottom
-    public var proportion: SlideInPresentationProportion = .normal
+    public var length: SlideInPresentationLength = .normal
     public var visualEffect: SlideInPresentationVisualEffect = .dimming(alpha: 0.5)
     public var disableCompactVerticalSize = false
 
@@ -23,12 +24,12 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
         presenting: UIViewController?,
         source: UIViewController
     ) -> UIPresentationController? {
-
         let presentationController = SlideInPresentationController(
             presentedViewController: presented,
             presenting: presenting,
+            type: type,
             direction: direction,
-            proportion: proportion,
+            length: length,
             visualEffect: visualEffect
         )
         presentationController.delegate = self
