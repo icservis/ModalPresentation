@@ -134,7 +134,8 @@
 				84408FE525CC7EEB00BDD188 /* PopUpPresentation */,
 				84408FE125CC7EEB00BDD188 /* SlideInPresentation */,
 			);
-			path = ModalPresentation;
+			name = ModalPresentation;
+			path = ../Sources/ModalPresentation;
 			sourceTree = "<group>";
 		};
 		84408FE125CC7EEB00BDD188 /* SlideInPresentation */ = {
