@@ -10,7 +10,7 @@ import UIKit
 
 public class SlideInPresentationCoordinator: NSObject {
     public var direction: SlideInPresentationDirection = .bottom
-    public var relativeSize: SlideInPresentationRelativeSize = .init(proportion: .custom(1.0), length: .custom(0.5))
+    public var relativeSize: SlideInPresentationRelativeSize = .init(proportion: .custom(1.0), length: .custom(0.7))
     public var visualEffect: SlideInPresentationVisualEffect = .dimming(alpha: 0.5)
     public var disableCompactVerticalSize = false
 

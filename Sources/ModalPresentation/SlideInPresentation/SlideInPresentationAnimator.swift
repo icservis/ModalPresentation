@@ -58,6 +58,10 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
         controller.view.frame = initialFrame
         UIView.animate(
             withDuration: animationDuration,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0,
+            options: UIView.AnimationOptions.curveEaseOut,
             animations: {
                 controller.view.frame = finalFrame
             }, completion: { [weak self] _ in

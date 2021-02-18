@@ -11,7 +11,6 @@ import ModalPresentation
 class SlideInViewController: UIViewController {
     lazy var presenter: SlideInPresentationCoordinator = {
         let presenter = SlideInPresentationCoordinator()
-        presenter.visualEffect = .blur(style: .regular)
         return presenter
     }()
 
