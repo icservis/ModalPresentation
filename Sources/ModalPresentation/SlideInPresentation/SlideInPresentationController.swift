@@ -8,30 +8,6 @@
 
 import UIKit
 
-public enum SlideInPresentationType {
-    public typealias Value = CGFloat
-    case page
-    case sheet
-    case custom(Value)
-
-    public init?(value: Value) {
-        let range: ClosedRange<Value> = (0...1)
-        precondition(range.contains(value))
-        self = SlideInPresentationType.custom(value)
-    }
-
-    public var value: Value {
-        switch self {
-        case .page:
-            return 1
-        case .sheet:
-            return 0.95
-        case let .custom(value):
-            return value
-        }
-    }
-}
-
 public enum SlideInPresentationDirection: Int {
     case left = 0
     case top
@@ -39,27 +15,55 @@ public enum SlideInPresentationDirection: Int {
     case bottom
 }
 
-public enum SlideInPresentationLength {
-    public typealias Value = CGFloat
-    case normal
-    case full
-    case value(Value)
+public struct SlideInPresentationRelativeSize {
+    public enum Proportion: RawRepresentable {
+        public typealias RawValue = CGFloat
 
-    public init?(value: Value) {
-        let range: ClosedRange<Value> = (0...1)
-        precondition(range.contains(value))
-        self = SlideInPresentationLength.value(value)
+        case custom(RawValue)
+
+        public init?(rawValue: CGFloat) {
+            let range: ClosedRange<RawValue> = (0...1)
+            guard range.contains(rawValue) else { return nil }
+            self = Self.custom(rawValue)
+        }
+
+        public var rawValue: RawValue {
+            switch self {
+            case let .custom(value):
+                return value
+            }
+        }
     }
 
-    public var value: Value {
-        switch self {
-        case .normal:
-            return 0.475
-        case .full:
-            return 0.95
-        case let .value(value):
-            return value
+    public let proportion: Proportion
+
+    public enum Length: RawRepresentable {
+        public typealias RawValue = CGFloat
+
+        case custom(RawValue)
+
+        public init?(rawValue: CGFloat) {
+            let range: ClosedRange<RawValue> = (0...1)
+            guard range.contains(rawValue) else { return nil }
+            self = Self.custom(rawValue)
         }
+
+        public var rawValue: RawValue {
+            switch self {
+            case let .custom(value):
+                return value
+            }
+        }
+    }
+
+    public let length: Length
+
+    public init(
+        proportion: Proportion,
+        length: Length
+    ) {
+        self.proportion = proportion
+        self.length = length
     }
 }
 
@@ -69,22 +73,19 @@ public enum SlideInPresentationVisualEffect {
 }
 
 public class SlideInPresentationController: UIPresentationController {
-    private let type: SlideInPresentationType
     private let direction: SlideInPresentationDirection
-    private let length: SlideInPresentationLength
+    private let relativeSize: SlideInPresentationRelativeSize
     private let visualEffect: SlideInPresentationVisualEffect
 
     init(
         presentedViewController: UIViewController,
         presenting presentingViewController: UIViewController?,
-        type: SlideInPresentationType,
         direction: SlideInPresentationDirection,
-        length: SlideInPresentationLength,
+        relativeSize: SlideInPresentationRelativeSize,
         visualEffect: SlideInPresentationVisualEffect
     ) {
-        self.type = type
         self.direction = direction
-        self.length = length
+        self.relativeSize = relativeSize
         self.visualEffect = visualEffect
         super.init(
             presentedViewController: presentedViewController,
@@ -298,13 +299,13 @@ public class SlideInPresentationController: UIPresentationController {
         switch direction {
         case .left, .right:
             return CGSize(
-                width: Int(parentSize.width * length.value),
-                height: Int(parentSize.height * type.value)
+                width: CGFloat(parentSize.width * relativeSize.length.rawValue),
+                height: CGFloat(parentSize.height * relativeSize.proportion.rawValue)
             )
         case .top, .bottom:
             return CGSize(
-                width: Int(parentSize.width * type.value),
-                height: Int(parentSize.height * length.value)
+                width: CGFloat(parentSize.width * relativeSize.proportion.rawValue),
+                height: CGFloat(parentSize.height * relativeSize.length.rawValue)
             )
         }
     }
