@@ -11,8 +11,6 @@ import ModalPresentation
 class SlideInViewController: UIViewController {
     lazy var presenter: SlideInPresentationCoordinator = {
         let presenter = SlideInPresentationCoordinator()
-        presenter.type = .sheet
-        presenter.length = .full
         presenter.visualEffect = .blur(style: .regular)
         return presenter
     }()
@@ -34,16 +32,34 @@ class SlideInViewController: UIViewController {
         changeVisualEffetSettings()
     }
 
+    @IBOutlet weak var lengthControl: UISlider! {
+        didSet {
+            lengthControl.minimumValue = 0
+            lengthControl.maximumValue = 1
+            lengthControl.value = Float(presenter.relativeSize.length.rawValue)
+        }
+    }
+    @IBAction func lengthValueChanged(_ sender: UISlider) {
+        guard let length = SlideInPresentationRelativeSize.Length(rawValue: CGFloat(sender.value)) else { return }
+        presenter.relativeSize = SlideInPresentationRelativeSize(
+            proportion: presenter.relativeSize.proportion,
+            length: length
+        )
+    }
+
     @IBOutlet weak var proportionControl: UISlider! {
         didSet {
             proportionControl.minimumValue = 0
             proportionControl.maximumValue = 1
-            proportionControl.value = Float(presenter.length.value)
+            proportionControl.value = Float(presenter.relativeSize.proportion.rawValue)
         }
     }
     @IBAction func proportionValueChanged(_ sender: UISlider) {
-        guard let length = SlideInPresentationLength(value: CGFloat(sender.value)) else { return }
-        presenter.length = length
+        guard let proportion = SlideInPresentationRelativeSize.Proportion(rawValue: CGFloat(sender.value)) else { return }
+        presenter.relativeSize = SlideInPresentationRelativeSize(
+            proportion: proportion,
+            length: presenter.relativeSize.length
+        )
     }
 
     @IBOutlet weak var directionControl: UISegmentedControl! {

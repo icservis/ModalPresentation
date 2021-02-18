@@ -104,14 +104,20 @@
                                     <segue destination="2Ac-Xi-OaG" kind="presentation" identifier="openModal" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Y0M-RO-CbG"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JCh-gJ-MOP">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-XP-Biq">
                                 <rect key="frame" x="18" y="94" width="378" height="31"/>
+                                <connections>
+                                    <action selector="lengthValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dsc-S2-UV9"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JCh-gJ-MOP">
+                                <rect key="frame" x="18" y="174" width="378" height="31"/>
                                 <connections>
                                     <action selector="proportionValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="C5f-lL-O0T"/>
                                 </connections>
                             </slider>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JPX-g3-yFM">
-                                <rect key="frame" x="77.5" y="174" width="259" height="32"/>
+                                <rect key="frame" x="77.5" y="254" width="259" height="32"/>
                                 <segments>
                                     <segment title="Left"/>
                                     <segment title="Top"/>
@@ -123,7 +129,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-IM-QjD">
-                                <rect key="frame" x="133.5" y="255" width="147" height="32"/>
+                                <rect key="frame" x="133.5" y="335" width="147" height="32"/>
                                 <segments>
                                     <segment title="Dimming"/>
                                     <segment title="Blur"/>
@@ -133,7 +139,7 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C28-DQ-3DV">
-                                <rect key="frame" x="20" y="306" width="374" height="61"/>
+                                <rect key="frame" x="20" y="386" width="374" height="61"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Lb-b8-8pd">
                                         <rect key="frame" x="-2" y="0.0" width="378" height="31"/>
@@ -165,13 +171,16 @@
                             <constraint firstItem="JCh-gJ-MOP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7RE-73-sOo"/>
                             <constraint firstItem="JCh-gJ-MOP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KUI-Ka-sxS"/>
                             <constraint firstItem="JPX-g3-yFM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NYY-tk-opu"/>
-                            <constraint firstItem="JCh-gJ-MOP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="T6a-GZ-lXt"/>
                             <constraint firstItem="Ahz-IM-QjD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W0N-AW-Gdc"/>
+                            <constraint firstItem="Uln-XP-Biq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eh9-uD-a2X"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eZZ-aF-G0c" secondAttribute="bottom" constant="40" id="ez5-Cl-OTo"/>
                             <constraint firstItem="JPX-g3-yFM" firstAttribute="top" secondItem="JCh-gJ-MOP" secondAttribute="bottom" constant="50" id="fxG-Sc-bcy"/>
+                            <constraint firstItem="JCh-gJ-MOP" firstAttribute="top" secondItem="Uln-XP-Biq" secondAttribute="bottom" constant="50" id="o67-Y4-iKj"/>
                             <constraint firstItem="Ahz-IM-QjD" firstAttribute="top" secondItem="JPX-g3-yFM" secondAttribute="bottom" constant="50" id="pZH-1q-jBb"/>
+                            <constraint firstItem="Uln-XP-Biq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="rcG-G1-MGx"/>
                             <constraint firstItem="eZZ-aF-G0c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="w7q-IH-HVc"/>
                             <constraint firstItem="C28-DQ-3DV" firstAttribute="top" secondItem="Ahz-IM-QjD" secondAttribute="bottom" constant="20" id="xDL-ep-gLw"/>
+                            <constraint firstItem="Uln-XP-Biq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="zt4-cA-AtO"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SlideIn" image="square.and.arrow.up" catalog="system" id="q7K-nb-uZx"/>
@@ -179,6 +188,7 @@
                         <outlet property="blurStyleControl" destination="d5X-a8-U8N" id="pcG-yu-7Ic"/>
                         <outlet property="dimmingAlphaControl" destination="8Lb-b8-8pd" id="ZQP-uT-pFf"/>
                         <outlet property="directionControl" destination="JPX-g3-yFM" id="4hG-iU-s6D"/>
+                        <outlet property="lengthControl" destination="Uln-XP-Biq" id="f6o-1n-UaV"/>
                         <outlet property="openButton" destination="eZZ-aF-G0c" id="8LU-Yq-qT7"/>
                         <outlet property="proportionControl" destination="JCh-gJ-MOP" id="9Ya-l3-aNl"/>
                         <outlet property="visualEffectControl" destination="Ahz-IM-QjD" id="NVV-gY-B58"/>
