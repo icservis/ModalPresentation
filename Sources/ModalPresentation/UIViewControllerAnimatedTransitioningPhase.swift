@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum UIViewControllerAnimatedTransitioningPhase {
+public enum UIViewControllerAnimatedTransitioningPhase {
     case presentation
     // case management
     case dismissal

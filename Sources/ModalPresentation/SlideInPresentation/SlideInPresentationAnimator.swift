@@ -8,19 +8,57 @@
 
 import UIKit
 
+public struct SlideInPresentationAnimationConfig {
+    public let animationDuration: TimeInterval
+    public let animationDelay: TimeInterval
+    public let dampingRatio: CGFloat
+    public let velocity: CGFloat
+    public let options: UIView.AnimationOptions
+
+    public static let `default` = SlideInPresentationAnimationConfig(
+        animationDuration: 0.25,
+        animationDelay: 0.0,
+        dampingRatio: 0.7,
+        velocity: 0.0,
+        options: [UIView.AnimationOptions.curveEaseOut]
+    )
+
+    public static let noDamping = SlideInPresentationAnimationConfig(
+        animationDuration: 0.25,
+        animationDelay: 0.0,
+        dampingRatio: 1,
+        velocity: 0.0,
+        options: []
+    )
+}
+
 public class SlideInPresentationAnimator: NSObject {
     private let direction: SlideInPresentationDirection
     private let phase: UIViewControllerAnimatedTransitioningPhase
+    private let config: SlideInPresentationAnimationConfig
 
-    init(direction: SlideInPresentationDirection, phase: UIViewControllerAnimatedTransitioningPhase) {
+    public init(
+        direction: SlideInPresentationDirection,
+        phase: UIViewControllerAnimatedTransitioningPhase,
+        config: SlideInPresentationAnimationConfig
+    ) {
         self.direction = direction
         self.phase = phase
+        self.config = config
+    }
+
+    public convenience init(direction: SlideInPresentationDirection, phase: UIViewControllerAnimatedTransitioningPhase) {
+        self.init(
+            direction: direction,
+            phase: phase,
+            config: SlideInPresentationAnimationConfig.default
+        )
     }
 }
 
 extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return config.animationDuration
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -58,13 +96,12 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
         controller.view.frame = initialFrame
         UIView.animate(
             withDuration: animationDuration,
-            delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 0,
-            options: UIView.AnimationOptions.curveEaseOut,
-            animations: {
-                controller.view.frame = finalFrame
-            }, completion: { [weak self] _ in
+            delay: config.animationDelay,
+            usingSpringWithDamping: config.dampingRatio,
+            initialSpringVelocity: config.velocity,
+            options: config.options,
+            animations: { controller.view.frame = finalFrame },
+            completion: { [weak self] _ in
                 let finished = !transitionContext.transitionWasCancelled
                 if let mode = self?.phase, case .dismissal = mode, finished {
                     controller.view.removeFromSuperview()

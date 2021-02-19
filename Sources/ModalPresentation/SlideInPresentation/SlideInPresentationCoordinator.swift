@@ -12,6 +12,7 @@ public class SlideInPresentationCoordinator: NSObject {
     public var direction: SlideInPresentationDirection = .bottom
     public var relativeSize: SlideInPresentationRelativeSize = .init(proportion: .custom(1.0), length: .custom(0.7))
     public var visualEffect: SlideInPresentationVisualEffect = .dimming(alpha: 0.5)
+    public var animationConfig: SlideInPresentationAnimationConfig = .default
     public var disableCompactVerticalSize = false
 
     weak var interactionController: UIPercentDrivenInteractiveTransition?
@@ -39,13 +40,13 @@ extension SlideInPresentationCoordinator: UIViewControllerTransitioningDelegate 
         presenting: UIViewController,
         source: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        return SlideInPresentationAnimator(direction: direction, phase: .presentation)
+        return SlideInPresentationAnimator(direction: direction, phase: .presentation, config: animationConfig)
     }
 
     public func animationController(
         forDismissed dismissed: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        return SlideInPresentationAnimator(direction: direction, phase: .dismissal)
+        return SlideInPresentationAnimator(direction: direction, phase: .dismissal, config: animationConfig)
     }
 
     public func interactionControllerForDismissal(
